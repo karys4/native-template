@@ -20,6 +20,8 @@ export default class LoginForm extends Component {
     this.state = {
       correo: "",
       contrasena: "",
+      correoMensajeValidacion: "",
+      contrasenaMensajeValidacion: "",
     };
   }
   cambioCampoCorreo(correo) {
@@ -35,22 +37,28 @@ export default class LoginForm extends Component {
   }
 
   botonOprimido() {
+    //Borrar mensaje de texto cada vez que se oprime botón de iniciar sesión
+    this.setState({ correoMensajeValidacion: "" });
+    this.setState({ contrasenaMensajeValidacion: "" });
+
     if (this.state.correo == "" && this.state.contrasena != "") {
-      alert(this.state.correo + "Introduce tu correo electrónico.");
+      this.setState({
+        correoMensajeValidacion: "Ingresa tu correo electrónico",
+      });
     } else if (this.state.contrasena == "" && this.state.correo != "") {
-      alert(this.state.contrasena + "Introduce tu contraseña.");
+      this.setState({ contrasenaMensajeValidacion: "Ingresa tu contraseña" });
     } else if ((this.state.correo && this.state.contrasena) == "") {
-      alert(
-        this.state.correo +
-          this.state.contrasena +
-          "Introduce tu correo electrónico y contraseña."
-      );
+      this.setState({
+        correoMensajeValidacion: "Estos campos son requeridos",
+      });
+      this.setState({
+        contrasenaMensajeValidacion: "Estos campos son requeridos",
+      });
     }
   }
 
   render() {
     return (
-      //Si es más de un elemento, debe ir dentro de un View.
       <SafeAreaView style={styles.principal}>
         <View style={styles.container}>
           <Image
@@ -65,12 +73,8 @@ export default class LoginForm extends Component {
             value={this.state.correo}
             onChangeText={(correo) => this.cambioCampoCorreo(correo)}
           />
-          <Text
-            style={styles.textoCampos}
-            value={this.state.textoCampos}
-            onChangeText={(textoCampos) => this.cambioTextoCampos(textoCampos)}
-          >
-            Hola
+          <Text style={styles.textoCampos}>
+            {this.state.correoMensajeValidacion}
           </Text>
 
           <TextInput
@@ -84,6 +88,10 @@ export default class LoginForm extends Component {
               this.cambioCampoContrasena(contrasena)
             }
           />
+
+          <Text style={styles.textoCampos}>
+            {this.state.contrasenaMensajeValidacion}
+          </Text>
           <TouchableOpacity style={styles.boton}>
             <Text
               style={styles.titleButton}
@@ -120,7 +128,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#6f4a8e",
     alignItems: "center",
-    marginTop: 80,
   },
   input: {
     height: 60,
@@ -153,6 +160,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textoCampos: {
-    color: "#6f4a8e",
+    color: "red",
   },
 });
