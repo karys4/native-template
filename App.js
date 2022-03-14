@@ -15,7 +15,7 @@ import LoginForm from "./views/loginForm/LoginForm";
 
 export default function App() {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: "#6f4a8e" }}>
       <LoginForm />
     </View>
     /*<NavigationContainer>
