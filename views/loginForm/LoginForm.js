@@ -65,33 +65,35 @@ export default class LoginForm extends Component {
             style={styles.imagen}
             source={require("../../assets/Logo.png")}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Correo Electrónico"
-            autoCapitalize="none"
-            placeholderTextColor={"#6f4a8e"}
-            value={this.state.correo}
-            onChangeText={(correo) => this.cambioCampoCorreo(correo)}
-          />
-          <Text style={styles.textoCampos}>
-            {this.state.correoMensajeValidacion}
-          </Text>
+          <View style={styles.contenedorInputs}>
+            <TextInput
+              style={styles.input}
+              placeholder="Correo Electrónico"
+              autoCapitalize="none"
+              placeholderTextColor={"#6f4a8e"}
+              value={this.state.correo}
+              onChangeText={(correo) => this.cambioCampoCorreo(correo)}
+            />
+            <Text style={styles.textoCampos}>
+              {this.state.correoMensajeValidacion}
+            </Text>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            autoCapitalize="none"
-            secureTextEntry={true}
-            placeholderTextColor={"#6f4a8e"}
-            value={this.state.contrasena}
-            onChangeText={(contrasena) =>
-              this.cambioCampoContrasena(contrasena)
-            }
-          />
+            <TextInput
+              style={styles.input}
+              placeholder="Contraseña"
+              autoCapitalize="none"
+              secureTextEntry={true}
+              placeholderTextColor={"#6f4a8e"}
+              value={this.state.contrasena}
+              onChangeText={(contrasena) =>
+                this.cambioCampoContrasena(contrasena)
+              }
+            />
+            <Text style={styles.textoCampos}>
+              {this.state.contrasenaMensajeValidacion}
+            </Text>
+          </View>
 
-          <Text style={styles.textoCampos}>
-            {this.state.contrasenaMensajeValidacion}
-          </Text>
           <TouchableOpacity style={styles.boton}>
             <Text
               style={styles.titleButton}
@@ -129,19 +131,34 @@ const styles = StyleSheet.create({
     backgroundColor: "#6f4a8e",
     alignItems: "center",
   },
+  imagen: {
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  contenedorInputs: {
+    backgroundColor: "#eee9f1",
+    borderRadius: 10,
+    margin: 15,
+    padding: 10,
+    alignItems: "center",
+  },
   input: {
     height: 60,
-    width: 365,
+    width: 250,
     margin: 12,
-    borderWidth: 1,
+    //borderWidth: 1,
     padding: 10,
     borderRadius: 10,
     backgroundColor: "white",
+    alignContent: "center",
+  },
+  textoCampos: {
+    color: "red",
   },
   boton: {
     height: 60,
-    width: 365,
-    marginTop: 50,
+    width: 250,
+    marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
     borderWidth: 1,
@@ -154,12 +171,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     paddingTop: 20,
-  },
-  imagen: {
-    alignContent: "center",
-    justifyContent: "center",
-  },
-  textoCampos: {
-    color: "red",
   },
 });
