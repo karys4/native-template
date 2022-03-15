@@ -9,10 +9,12 @@ import {
   Linking,
   Image,
   Alert,
+  Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { Component } from "react";
-import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import { EvilIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 export default class LoginForm extends Component {
   constructor() {
@@ -43,16 +45,16 @@ export default class LoginForm extends Component {
 
     if (this.state.correo == "" && this.state.contrasena != "") {
       this.setState({
-        correoMensajeValidacion: "Ingresa tu correo electrónico",
+        correoMensajeValidacion: "Ingresa tu correo electrónico.",
       });
     } else if (this.state.contrasena == "" && this.state.correo != "") {
-      this.setState({ contrasenaMensajeValidacion: "Ingresa tu contraseña" });
+      this.setState({ contrasenaMensajeValidacion: "Ingresa tu contraseña." });
     } else if ((this.state.correo && this.state.contrasena) == "") {
       this.setState({
-        correoMensajeValidacion: "Estos campos son requeridos",
+        correoMensajeValidacion: "Estos campos son requeridos.",
       });
       this.setState({
-        contrasenaMensajeValidacion: "Estos campos son requeridos",
+        contrasenaMensajeValidacion: "Estos campos son requeridos.",
       });
     }
   }
@@ -66,29 +68,34 @@ export default class LoginForm extends Component {
             source={require("../../assets/Logo.png")}
           />
           <View style={styles.contenedorInputs}>
-            <TextInput
-              style={styles.input}
-              placeholder="Correo Electrónico"
-              autoCapitalize="none"
-              placeholderTextColor={"#6f4a8e"}
-              value={this.state.correo}
-              onChangeText={(correo) => this.cambioCampoCorreo(correo)}
-            />
+            <View style={{ alignItems: "center", flexDirection: "row" }}>
+              <TextInput
+                style={styles.input}
+                placeholder="Correo Electrónico"
+                autoCapitalize="none"
+                placeholderTextColor={"#6f4a8e"}
+                value={this.state.correo}
+                onChangeText={(correo) => this.cambioCampoCorreo(correo)}
+              />
+              <EvilIcons name="lock" size={31} color="black" />
+            </View>
             <Text style={styles.textoCampos}>
               {this.state.correoMensajeValidacion}
             </Text>
-
-            <TextInput
-              style={styles.input}
-              placeholder="Contraseña"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholderTextColor={"#6f4a8e"}
-              value={this.state.contrasena}
-              onChangeText={(contrasena) =>
-                this.cambioCampoContrasena(contrasena)
-              }
-            />
+            <View style={{ alignItems: "center", flexDirection: "row" }}>
+              <TextInput
+                style={styles.input}
+                placeholder="Contraseña"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                placeholderTextColor={"#6f4a8e"}
+                value={this.state.contrasena}
+                onChangeText={(contrasena) =>
+                  this.cambioCampoContrasena(contrasena)
+                }
+              />
+              <Feather name="mail" size={20} color="black" />
+            </View>
             <Text style={styles.textoCampos}>
               {this.state.contrasenaMensajeValidacion}
             </Text>
@@ -151,6 +158,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
     alignContent: "center",
+    textAlign: "center",
   },
   textoCampos: {
     color: "red",
